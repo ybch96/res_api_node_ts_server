@@ -1,5 +1,21 @@
+import colors from "colors"
 import server from "./server";
+import db from "./config/db";
 
-server.listen(4000,() => {
-    console.log(`Iniciando en el puerto 4000`)
+async function conection() {
+    try {
+        await  db.authenticate()
+        db.sync()
+        console.log(colors.blue("conexion exitosa"))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+conection()
+
+const port = process.env.PORT || 4000
+
+server.listen(port,() => {
+    console.log(colors.cyan(`Iniciando en el puerto ${port}`))
 })
