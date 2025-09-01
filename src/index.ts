@@ -1,6 +1,7 @@
 import colors from "colors"
 import server from "./server";
 import db from "./config/db";
+import router from "./router";
 
 async function conection() {
     try {
@@ -13,6 +14,8 @@ async function conection() {
 }
 
 conection()
+
+server.use("/", router)
 
 const port = process.env.PORT || 4000
 
